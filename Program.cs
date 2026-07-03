@@ -8,19 +8,35 @@ string? userAnswer;
 string? mathQuestion;
 int computerAnswer;
 bool isTrue = true;
+int level = 1;
+int number1;
+int number2;
 int totalOp;
 do
 {
-    int number1 = r.Next(0, 101);
-    int number2 = r.Next(0, 101);
-    Console.WriteLine($"Welcome to the math game! Current points: {points}");
+    if (level == 1)
+    {
+        number1 = r.Next(0, 101);
+        number2 = r.Next(0, 101);
+    } else if (level == 2)
+    {
+        number1 = r.Next(100, 501);
+        number2 = r.Next(100, 501);
+    } else
+    {
+        number1 = r.Next();
+        number2 = r.Next();
+    }
+    Console.WriteLine($"Welcome to the math game main menu! Current points: {points}");
+    Console.WriteLine($"Current difficulty level: {level}");
     Console.WriteLine("Choose an option:");
     Console.WriteLine("1. Get an addition question.");
     Console.WriteLine("2. Get a subtraction question.");
     Console.WriteLine("3. Get a division question.");
     Console.WriteLine("4. Get a multiplication question.");
     Console.WriteLine("5. Show past answers.");
-    Console.WriteLine("6. Exit the game.");
+    Console.WriteLine("6. Change current difficulty level.");
+    Console.WriteLine("7. Exit the game.");
     string? userInput = Console.ReadLine();
     switch (userInput)
     {
@@ -70,7 +86,18 @@ do
             {
                 while (number2 == 0 || (number1 % number2) != 0)
                 {
-                    number2 = r.Next(0, 101);
+                    if (level == 1)
+                    {
+                        number2 = r.Next(0, 101);
+                    }
+                    else if (level == 2)
+                    {
+                        number2 = r.Next(100, 501);
+                    }
+                    else
+                    {
+                        number2 = r.Next();
+                    }
                 }
                 Console.Write($"{number1} / {number2} = ");
                 computerAnswer = number1 / number2;
@@ -135,6 +162,13 @@ do
                 }
             }
         case "6":
+            {
+                Console.WriteLine("Enter your new difficulty level 1 through 3 (1 = Beginner, 2 = Intermediate, 3 = Expert)");
+                userInput = Console.ReadLine();
+                level = int.Parse(userInput);
+                continue;
+            }
+        case "7":
             {
                 Console.WriteLine("Thank you so much for playing.");
                 isTrue = false;
