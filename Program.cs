@@ -1,4 +1,5 @@
 ﻿
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 Random r = new Random();
@@ -10,6 +11,7 @@ int computerAnswer;
 bool isTrue = true;
 int level = 1;
 int number1;
+Stopwatch timer = Stopwatch.StartNew();
 int number2;
 int totalOp;
 do
@@ -171,6 +173,8 @@ do
         case "7":
             {
                 Console.WriteLine("Thank you so much for playing.");
+                timer.Stop();
+                Console.WriteLine($"You spent a total of {timer.ElapsedMilliseconds / 1000} seconds playing.");
                 isTrue = false;
                 Console.WriteLine("Press Enter to continue");
                 Console.ReadLine();
